@@ -24,8 +24,6 @@ export const environment = {
   }
 };
 
-
- */
 // Firebase Account for PF
 
 // export const environment = {

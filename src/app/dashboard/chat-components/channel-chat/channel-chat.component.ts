@@ -152,10 +152,8 @@ export class ChannelChatComponent {
 
 
   scrollDown() {
-    if (this.level === '1') {
-      this.scrollElement = this.scrollElementRef?.nativeElement;
-      this.scrollElement.scrollTop = this.scrollElement.scrollHeight;
-    }
+    this.scrollElement = this.scrollElementRef?.nativeElement ? this.scrollElementRef?.nativeElement : undefined;
+    if (this.scrollElement !== undefined) this.scrollElement.scrollTop = this.scrollElement.scrollHeight;
   }
 
 

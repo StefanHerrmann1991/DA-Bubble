@@ -71,11 +71,12 @@ export class UserProfileEditComponent {
   * @param {any} newEmail - The new email to set for the user.
   */
   async changeEmailInAuth(newEmail: any) {
-    try {
-      console.log(newEmail);
-      this.authService.updateAndVerifyEmail(newEmail);
-    } catch (error) {
-      console.log('Change email failed')
+    if (this.userEditForm.value.email !== newEmail) {
+      try {
+        this.authService.updateAndVerifyEmail(newEmail);
+      } catch (error) {
+        console.log('Change email failed')
+      }
     }
   }
 
@@ -106,7 +107,7 @@ export class UserProfileEditComponent {
   * @param {any} event - The file selection event.
   */
   onSelect(event: any) {
-    const file = new FileUpload(event.target.files[0]); 
+    const file = new FileUpload(event.target.files[0]);
     let fileType = file.file.type;
     let fileSize = file.file.size;
     if (fileSize > 500 * 1024) {
@@ -167,8 +168,6 @@ export class UserProfileEditComponent {
       this.setNewPic(selectedAvatar);
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    dialogRef.close();
   }
 }
