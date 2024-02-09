@@ -1,7 +1,7 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Injectable, inject } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Channel } from '../../models/channel';
 import { UserProfile } from '../../models/user-profile';
 import { FirebaseUtilsService } from './firebase-utils.service';
@@ -128,6 +128,7 @@ export class ChannelService {
     });
   }
 
+
   /**
    * Subscribes to the channels tree and updates the tree data source.
    */
@@ -139,6 +140,7 @@ export class ChannelService {
       this.dataLoaded.next(true);
     });
   }
+
 
   /**
    * Checks if a given channel is a closed channel. Its necessary to prevent the search function from opening
@@ -166,8 +168,7 @@ export class ChannelService {
 
 
   populateChannelsAndMore(list: any) {
-    let moreChannels: ChannelsNode[] = [];
-    console.log(this.currentUserId)
+    let moreChannels: ChannelsNode[] = []; 
     list.forEach((element: any) => {
       const channelObj = this.setChannelObj(element.data(), element.id);
       const containsCurrentUser = channelObj.usersData.some((user: any) => user.id === this.currentUserId);
@@ -303,4 +304,12 @@ export class ChannelService {
       isOnline: obj.isOnline,
     });
   }
+
+  private userUpdateSource = new Subject<void>();
+  userUpdated$ = this.userUpdateSource.asObservable();
+
+  userUpdated() {
+    this.userUpdateSource.next();
+  }
+
 }

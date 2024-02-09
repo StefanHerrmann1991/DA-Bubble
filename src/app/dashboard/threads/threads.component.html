@@ -28,7 +28,7 @@
         <app-message  *ngFor="let thread of getAllReplies(); trackBy: trackByFunction" [message]="thread" [parentMessageId]="parentMessageId" [collPath]="collPath" [allUsers]="allUsers"></app-message>
         <app-scroll-button [ngStyle]="{'opacity': !isElementVisible ? '1' : '0'}" (EmitScrollDown)="scrollDown()" [chatData]="{collPath: collPath}"></app-scroll-button>
         <div class="input-message-container">
-            <textarea [(ngModel)]="text" (ngModelChange)="checkForTag()" #myTextarea placeholder="Antworten..." (keyup)="sendByKey($event)" (keydown)="sendByKey($event)"></textarea>
+            <textarea #threadTextarea [(ngModel)]="text" (ngModelChange)="checkForTag()" #myTextarea placeholder="Antworten..." (keyup)="sendByKey($event)" (keydown)="sendByKey($event)"></textarea>
             <div class="control-container">
                 <div class="chat-action-box">
                     <div class="file-upload-button">

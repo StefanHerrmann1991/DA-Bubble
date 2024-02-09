@@ -56,7 +56,7 @@
         <app-scroll-button [ngStyle]="{'opacity': !isElementVisible ? '1' : '0'}" (EmitScrollDown)="scrollDown()"
             [chatData]="{collPath: 'channel/' + channelId + '/message'}"></app-scroll-button>
         <div class="input-message-container">
-            <textarea #myTextarea [(ngModel)]="text" (ngModelChange)="checkForTag()"
+            <textarea autofocus #myTextarea [(ngModel)]="text" (ngModelChange)="checkForTag()"
                 placeholder="Nachricht an #{{channel?.channelName}}" (keyup)="sendByKey($event)"
                 (keydown)="sendByKey($event)"></textarea>
             <div class="control-container">

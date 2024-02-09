@@ -52,6 +52,7 @@ export class ThreadsComponent {
   scrollElement: any;
   @ViewChild('scroller') scrollElementRef?: ElementRef;
   @ViewChild('endScrollElement') endScrollElement?: ElementRef;
+  @ViewChild('threadTextarea') threadTextarea?: ElementRef;
   private observer?: IntersectionObserver;
   isElementVisible: boolean = false;
   searchMessage: boolean = false;
@@ -72,6 +73,9 @@ export class ThreadsComponent {
   ) {
     this.userService.getUser(this.userService.getFromLocalStorage()).then((user: any) => { this.currentUser = user });
   }
+
+
+
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -97,6 +101,7 @@ export class ThreadsComponent {
 
   ngAfterViewInit() {
     this.initIntersectionObserver();
+    this.threadTextarea?.nativeElement.focus();
   }
 
 

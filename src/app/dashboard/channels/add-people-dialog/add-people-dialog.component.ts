@@ -139,6 +139,7 @@ export class AddPeopleDialogComponent {
       names.push(user.name);
     });
     this.notificationsService.showSuccess(`${names.join(', ')} erfolgreich hinzugefügt`);
+    this.channelService.userUpdated();
     this.dialogRef.close();
   }
 

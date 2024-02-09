@@ -73,8 +73,7 @@ export class EditChannelDialogComponent {
    * @param {number} width - The width of the window.
    */
   private checkMobileMode(width: number): void {
-    this.isMobile = width <= 750;
-    //console.log(this.isMobile);
+    this.isMobile = width <= 750;   
   }
 
 

@@ -5,6 +5,8 @@ import { AddPeopleDialogComponent } from '../add-people-dialog/add-people-dialog
 import { UsersFirebaseService } from 'src/app/shared/services/users-firebase.service';
 import { UserProfile } from 'src/app/models/user-profile';
 import { UserProfileSubViewComponent } from '../../users/user-profile-sub-view/user-profile-sub-view.component';
+import { ChannelService } from 'src/app/shared/services/channel.service';
+import { Subscription } from 'rxjs';
 
 
 /**
@@ -24,18 +26,41 @@ export class UserMenuDialogComponent {
   @Input() isMobile: boolean = false;
   openingInChat: boolean = this.data.openingInChat;
   channelUsers: UserProfile[] = [];
-
+  private userUpdateSubscription?: Subscription;
 
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<UserMenuDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private userService: UsersFirebaseService
+    private userService: UsersFirebaseService,
+    private channelService: ChannelService
   ) { }
 
 
   ngOnInit() {
     this.getAllUsers();
+    this.subscribeToUserUpdates();
+  }
+
+
+  subscribeToUserUpdates() {
+    this.userUpdateSubscription = this.channelService.userUpdated$.subscribe(() => {
+      this.clearUserList(); // Reset or clear the list
+      this.getAllUsers(); // Then reload or update the list
+    });
+  }
+
+
+  clearUserList() {
+    this.allUsersArray = []; // Clear the existing users array
+    this.channelUsers = []; // Clear the channel users array
+  }
+
+
+  ngOnDestroy() {
+    if (this.userUpdateSubscription) {
+      this.userUpdateSubscription.unsubscribe();
+    }
   }
 
 

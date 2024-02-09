@@ -35,15 +35,16 @@
           <img *ngIf="this.drawerService.checkScreenSizeForResponsive(450)" src="assets/img/rectangle.png">
         </div>
         <button class="menu-btn" mat-menu-item (click)="openUserProfile()">
-          <div>
-            <img *ngIf="this.drawerService.checkScreenSizeForResponsive(450)" class="person-icon"
-              src="assets/img/person.png"><span>Profile</span>
+          <div class="align-center">
+            <mat-icon *ngIf="this.drawerService.checkScreenSizeForResponsive(450)"
+              class="material-icons-outlined">account_circle</mat-icon>
+            <span>Profile</span>
           </div>
         </button>
         <button class="menu-btn" mat-menu-item (click)="userLoggedout()">
-          <div>
-            <img *ngIf="this.drawerService.checkScreenSizeForResponsive(450)"
-              src="assets/img/logout.png"><span>Logout</span>
+          <div class="align-center">
+            <mat-icon *ngIf="this.drawerService.checkScreenSizeForResponsive(450)"
+              class="material-icons-outlined">logout</mat-icon><span>Logout</span>
           </div>
         </button>
       </mat-menu>

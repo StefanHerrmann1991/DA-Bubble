@@ -4,6 +4,7 @@
   height: calc(100vh - 45px);
   height: calc(100svh - 45px);
 }
+
 header {
   display: flex;
   justify-content: space-between;
@@ -124,8 +125,15 @@ app-search-bar {
 }
 
 .person-icon {
+  width: 24px;
+  height: 24px;
   border: 2px solid black;
   border-radius: 100%;
+}
+
+.align-center {
+  display: flex;
+  align-items: center;
 }
 
 .rectangle-centered {
